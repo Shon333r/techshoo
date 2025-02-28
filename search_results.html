@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Результаты поиска - FILMSEARCH{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h1>Результаты поиска</h1>
+        <p>Найдено {{ films|length }} фильмов</p>
+    </div>
+
+    <div class="container">
+        <!-- Поисковая форма с дизайном и функциональностью -->
+        <div class="search-container">
+            <form action="/search" method="get" class="search-form">
+                <input type="text" name="query" value="{{ query }}" placeholder="Введите название фильма" required class="search-input">
+                <button type="submit" class="search-button">Поиск</button>
+            </form>
+        </div>
+
+        {% if films %}
+            <div class="movies">
+                {% for film in films %}
+                    <div class="movie">
+                        <img src="{{ film[2] }}" alt="{{ film[1] }}" class="movie-card-img">
+                        <h3>{{ film[1] }}</h3>
+                        <a href="/movie_info/{{ film[0] }}" class="btn-more">Подробнее</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Фильмы не найдены.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
+
+
